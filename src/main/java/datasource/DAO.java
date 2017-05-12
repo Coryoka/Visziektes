@@ -3,28 +3,20 @@ package datasource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DAO {
     private PropertiesLoader propertiesLoader;
 
-    private Connection con;
+    protected Connection con;
 
     public DAO() throws IOException, ClassNotFoundException {
         propertiesLoader = new PropertiesLoader("database.properties");
         Class.forName(propertiesLoader.getProperty("driver"));
     }
 
-    public boolean canConnect() throws SQLException {
-        checkDbConnection();
-        if(con != null){
-            return true;
-        }
-        return false;
-    }
-
-
-    private void checkDbConnection() throws SQLException {
+    protected void checkDbConnection() throws SQLException {
         if(con != null) {
             if (con.isClosed()) {
                 con = DriverManager.getConnection(makeConnectionString());

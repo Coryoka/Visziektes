@@ -1,5 +1,7 @@
 package sample;
 
+import Domain.Aquarium;
+import datasource.AquariumDAO;
 import datasource.DAO;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
-    private DAO dao;
+    private AquariumDAO aquariumDAO;
     @FXML Button homeButton;
     @FXML Text welcomeText;
 
@@ -32,7 +34,7 @@ public class Controller implements Initializable{
         });
 
         try {
-            dao = new DAO();
+            aquariumDAO = new AquariumDAO();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -40,7 +42,7 @@ public class Controller implements Initializable{
         }
 
         try {
-            System.out.println(dao.canConnect());
+            System.out.println(aquariumDAO.getAquariumOfGebruiker(1).get(0).getAqLengte());
         } catch (SQLException e) {
             e.printStackTrace();
         }
