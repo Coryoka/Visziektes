@@ -4,10 +4,15 @@ import Domain.Aquarium;
 import Domain.Gebruiker;
 import datasource.AquariumDAO;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +46,29 @@ public class AquariumsController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        aquariums.setRowFactory( tv -> {
+            TableRow<Aquarium> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Aquarium rowData = row.getItem();
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("dagboek.fxml"));
+                    DagboekController controller = new DagboekController();
+                    loader.setController(controller);
+                    Stage stage = (Stage)row.getScene().getWindow();
+                    Parent root = null;
+                    try {
+                        root = loader.load();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Scene scene = new Scene(root, 1280, 720);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            });
+            return row ;
+        });
     }
 
     private void initinalizeTableView() throws SQLException {

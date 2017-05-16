@@ -1,5 +1,7 @@
 package Domain;
 
+import java.util.ArrayList;
+
 public class Aquarium {
     private int aquariumId;
     private int gebruikerId;
@@ -11,6 +13,11 @@ public class Aquarium {
     private int aqLengte;
     private int aqBreedte;
     private int aqHoogte;
+    private ArrayList<AquariumDagOpname> dagboek;
+
+    public Aquarium(ArrayList<AquariumDagOpname> dagboek) {
+        this.dagboek = dagboek;
+    }
 
     public Aquarium(int aquariumId, int gebruikerId, int volumeInLiters, int temperatuur, String waterType, int aantalVerversingen, int procentWaterPerVerversing, int aqLengte, int aqBreedte, int aqHoogte) {
         this.aquariumId = aquariumId;
@@ -25,6 +32,13 @@ public class Aquarium {
         this.aqHoogte = aqHoogte;
     }
 
+    public void setDagboek(ArrayList<AquariumDagOpname> dagboek) {
+        this.dagboek = dagboek;
+    }
+
+    public ArrayList<AquariumDagOpname> getDagboek() {
+        return dagboek;
+    }
 
     public int getAquariumId() {
         return aquariumId;
@@ -64,5 +78,17 @@ public class Aquarium {
 
     public int getAqHoogte() {
         return aqHoogte;
+    }
+
+    public ArrayList<String> metingVariabelen() {
+        ArrayList<String> variabelen = new ArrayList<>();
+        for (AquariumDagOpname dagOpname : dagboek) {
+            for (Meting meting : dagOpname.getOpname().getMetingen()) {
+                if (!variabelen.contains(meting.getVariabeleId())) {
+                    variabelen.add(meting.getVariabeleId());
+                }
+            }
+        }
+        return variabelen;
     }
 }
