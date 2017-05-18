@@ -53,7 +53,7 @@ public class AquariumsController implements Initializable {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Aquarium rowData = row.getItem();
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("dagboek.fxml"));
-                    DagboekController controller = new DagboekController();
+                    DagboekController controller = new DagboekController(aquariums.getSelectionModel().getSelectedItem().getAquariumId());
                     loader.setController(controller);
                     Stage stage = (Stage)row.getScene().getWindow();
                     Parent root = null;
@@ -78,6 +78,6 @@ public class AquariumsController implements Initializable {
         watertype.setCellValueFactory(new PropertyValueFactory<Aquarium, String>("waterType"));
         verversing.setCellValueFactory(new PropertyValueFactory<Aquarium, Integer>("aantalVerversingen"));
         procentPerVerversing.setCellValueFactory(new PropertyValueFactory<Aquarium, Integer>("procentWaterPerVerversing"));
-        aquariums.getItems().setAll(aquariumDAO.getAquariumOfGebruiker(gebruiker.getGebruikerId()));
+        aquariums.getItems().setAll(aquariumDAO.getAquariumOfGebruiker(gebruiker.getNaam()));
     }
 }

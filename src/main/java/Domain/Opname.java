@@ -9,11 +9,22 @@ public class Opname {
     private String opmerking;
     private Voeding voeding;
 
+    public Opname() {
+        metingen = new ArrayList<>();
+    }
+
     public Opname(Time tijd, ArrayList<Meting> metingen, String opmerking, Voeding voeding) {
         this.tijd = tijd;
         this.metingen = metingen;
         this.opmerking = opmerking;
         this.voeding = voeding;
+    }
+
+    public void addMeting(Meting meting){
+        if(metingen == null){
+            metingen = new ArrayList<>();
+        }
+        metingen.add(meting);
     }
 
     public Time getTijd() {
@@ -32,4 +43,19 @@ public class Opname {
         return voeding;
     }
 
+    public void setTijd(Time tijd) {
+        this.tijd = tijd;
+    }
+
+    public void setMetingen(ArrayList<Meting> metingen) {
+        this.metingen = metingen;
+    }
+
+    public void setOpmerking(String opmerking) {
+        this.opmerking = opmerking;
+    }
+
+    public void setVoeding(Voeding voeding) {
+        this.voeding = voeding;
+    }
 }

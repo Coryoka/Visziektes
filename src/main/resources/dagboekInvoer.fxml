@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import jfxtras.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea fx:id="opmerking" layoutX="40.0" layoutY="135.0" prefHeight="123.0" prefWidth="253.0" />
+      <Text layoutX="40.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opmerking" />
+      <Text layoutX="332.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metingen" />
+      <Text layoutX="40.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voeding" />
+      <Text layoutX="40.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datum" />
+      <LocalDateTimeTextField fx:id="datumTijd" layoutX="40.0" layoutY="45.0" prefHeight="27.0" prefWidth="199.0" />
+      <Button fx:id="opslaan" layoutX="713.0" layoutY="395.0" mnemonicParsing="false" text="Opslaan" />
+      <Text layoutX="332.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PH" />
+      <TextField fx:id="PH" layoutX="332.0" layoutY="161.0" prefHeight="27.0" prefWidth="57.0" />
+      <Text layoutX="332.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="O2" />
+      <TextField fx:id="O2" layoutX="332.0" layoutY="227.0" prefHeight="27.0" prefWidth="57.0" />
+      <Text layoutX="332.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temp" />
+      <TextField fx:id="Temp" layoutX="332.0" layoutY="309.0" prefHeight="27.0" prefWidth="57.0" />
+      <Text layoutX="40.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Naam" />
+      <Text layoutX="225.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dosering" />
+      <TextField fx:id="naam" layoutX="40.0" layoutY="323.0" />
+      <TextField fx:id="dosering" layoutX="225.0" layoutY="323.0" prefHeight="27.0" prefWidth="68.0" />
+   </children>
+</Pane>

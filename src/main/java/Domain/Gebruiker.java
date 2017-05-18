@@ -1,17 +1,12 @@
 package Domain;
 
 public class Gebruiker {
-    private int gebruikerId;
     private String naam;
 
-    public Gebruiker(int gebruikerId, String naam) {
-        this.gebruikerId = gebruikerId;
+    public Gebruiker( String naam) {
         this.naam = naam;
     }
 
-    public int getGebruikerId() {
-        return gebruikerId;
-    }
 
     public String getNaam() {
         return naam;

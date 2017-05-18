@@ -1,17 +1,18 @@
 package Domain;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AquariumDagOpname {
-    private Date dag;
+    private Timestamp dag;
     private Opname opname;
 
-    public AquariumDagOpname(Date dag, Opname opname) {
+    public AquariumDagOpname(Timestamp dag, Opname opname) {
         this.dag = dag;
         this.opname = opname;
     }
 
-    public Date getDag() {
+    public Timestamp getDag() {
         return dag;
     }
 
@@ -24,6 +25,9 @@ public class AquariumDagOpname {
     }
 
     public String getVoeding() {
+        if(opname.getVoeding() == null){
+            return "";
+        }
         return opname.getVoeding().getNaam() + " dosering: " + opname.getVoeding().getDosering();
     }
 

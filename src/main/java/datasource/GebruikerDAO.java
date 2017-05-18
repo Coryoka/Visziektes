@@ -18,7 +18,7 @@ public class GebruikerDAO extends DAO {
         ResultSet resultSet = con.prepareStatement("SELECT * FROM Gebruiker WHERE GebruikerNaam = '" + naam +
                 "' AND GebruikerWachtwoord = '" + wachtwoord + "'").executeQuery();
         while(resultSet.next()){
-            gebruiker = new Gebruiker(resultSet.getInt("GebruikerID"),naam);
+            gebruiker = new Gebruiker(naam);
         }
         return gebruiker;
     }

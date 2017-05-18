@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Aquarium {
     private int aquariumId;
-    private int gebruikerId;
+    private String gebruikerNaam;
     private int volumeInLiters;
     private int temperatuur;
     private String waterType;
@@ -19,9 +19,9 @@ public class Aquarium {
         this.dagboek = dagboek;
     }
 
-    public Aquarium(int aquariumId, int gebruikerId, int volumeInLiters, int temperatuur, String waterType, int aantalVerversingen, int procentWaterPerVerversing, int aqLengte, int aqBreedte, int aqHoogte) {
+    public Aquarium(int aquariumId, String gebruikerId, int volumeInLiters, int temperatuur, String waterType, int aantalVerversingen, int procentWaterPerVerversing, int aqLengte, int aqBreedte, int aqHoogte) {
         this.aquariumId = aquariumId;
-        this.gebruikerId = gebruikerId;
+        this.gebruikerNaam = gebruikerId;
         this.volumeInLiters = volumeInLiters;
         this.temperatuur = temperatuur;
         this.waterType = waterType;
@@ -44,8 +44,8 @@ public class Aquarium {
         return aquariumId;
     }
 
-    public int getGebruikerId() {
-        return gebruikerId;
+    public String getGebruikerNaam() {
+        return gebruikerNaam;
     }
 
     public int getVolumeInLiters() {
@@ -83,9 +83,11 @@ public class Aquarium {
     public ArrayList<String> metingVariabelen() {
         ArrayList<String> variabelen = new ArrayList<>();
         for (AquariumDagOpname dagOpname : dagboek) {
-            for (Meting meting : dagOpname.getOpname().getMetingen()) {
-                if (!variabelen.contains(meting.getVariabeleId())) {
-                    variabelen.add(meting.getVariabeleId());
+            if(dagOpname.getOpname().getMetingen() != null) {
+                for (Meting meting : dagOpname.getOpname().getMetingen()) {
+                    if (!variabelen.contains(meting.getVariabeleId())) {
+                        variabelen.add(meting.getVariabeleId());
+                    }
                 }
             }
         }
