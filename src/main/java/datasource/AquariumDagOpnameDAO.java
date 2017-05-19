@@ -22,7 +22,6 @@ public class AquariumDagOpnameDAO extends DAO {
         HashMap<Timestamp, AquariumDagOpname> opnames = new HashMap<>();
         ResultSet resultSet = con.prepareStatement("SELECT ADO.Dag, M.VariabeleID, M.TijdMeting, M.WaardeMeting FROM AquariumDagOpname ADO INNER JOIN Meting M ON ADO.AquariumID = M.AquariumID AND ADO.Dag = M.Dag WHERE ADO.AquariumID = " +AquariumId + " ORDER BY TijdMeting").executeQuery();
         while(resultSet.next()) {
-            System.out.println("in resultset");
             Timestamp dag = resultSet.getTimestamp("Dag");
             Timestamp tijd = resultSet.getTimestamp("TijdMeting");
             Opname opname = new Opname();
@@ -30,21 +29,16 @@ public class AquariumDagOpnameDAO extends DAO {
             Meting meting = new Meting("", resultSet.getString("VariabeleID"), resultSet.getInt("WaardeMeting"));
             opname.addMeting(meting);
             if(opnames.get(dag) == null){
-                System.out.println("maakt nieuwe meting");
                 opnames.put(dag, new AquariumDagOpname(dag,opname));
             } else if(opnames.get(dag).getOpname().getTijd().equals(opname.getTijd())){
-                System.out.println("voegt toe aan meting");
                 opnames.get(dag).getOpname().addMeting(meting);
             } else {
-                System.out.println("op nieuw tijdstip");
 
                 opnames.put(dag, new AquariumDagOpname(dag, opname));
             }
         }
-        System.out.println(opnames.size());
         ResultSet resultSet1 = con.prepareStatement("SELECT ADO.Dag, O.OpmerkingTekst, O.TijdOpmerking FROM AquariumDagOpname ADO INNER JOIN Opmerking O ON ADO.AquariumID = O.AquariumID AND ADO.Dag = O.Dag WHERE ADO.AquariumID = " +AquariumId + " ORDER BY TijdOpmerking").executeQuery();
         while (resultSet1.next()){
-            System.out.println("in resultset1");
             Timestamp dag = resultSet1.getTimestamp("Dag");
             Timestamp tijd = resultSet1.getTimestamp("TijdOpmerking");
             Opname opname = new Opname();
@@ -60,7 +54,6 @@ public class AquariumDagOpnameDAO extends DAO {
         }
         ResultSet resultSet2 = con.prepareStatement("SELECT ADO.Dag, V.VoedingNaam, V.Dosering, V.TijdVoeding FROM AquariumDagOpname ADO INNER JOIN Voeding V ON ADO.AquariumID = V.AquariumID AND ADO.Dag = V.Dag WHERE ADO.AquariumID = " +AquariumId + " ORDER BY TijdVoeding").executeQuery();
         while (resultSet2.next()){
-            System.out.println("in resultset2");
             Timestamp dag = resultSet2.getTimestamp("Dag");
             Timestamp tijd = resultSet2.getTimestamp("TijdVoeding");
             Opname opname = new Opname();

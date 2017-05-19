@@ -61,7 +61,7 @@ public class NieuwInvoerController implements Initializable {
                 if(datumTijd.getLocalDateTime() != null){
                     Opname opname = new Opname();
 
-                    opname.setTijd(new Time(datumTijd.getLocalDateTime().getLong(ChronoField.SECOND_OF_DAY)));
+                    opname.setTijd(new Time(datumTijd.getLocalDateTime().getLong(ChronoField.SECOND_OF_DAY) *1000));
                     opname.setOpmerking(opmerking.getText());
 
                     ArrayList<Meting> metingen = new ArrayList<>();

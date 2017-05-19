@@ -12,11 +12,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -68,6 +71,7 @@ public class DagboekController implements Initializable {
 
         laadTableView();
 
+
         nieuweInvoer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -114,11 +118,64 @@ public class DagboekController implements Initializable {
         dagboekTableView.getColumns().addAll((Collection<? extends TableColumn<AquariumDagOpname, ?>>) kolommen);
 
         for(TableColumn kolom: kolommen){
+            kolom.setCellFactory(getCellfactory());
             kolom.setCellValueFactory(new PropertyValueFactory<String, AquariumDagOpname>(kolom.getText()));
         }
 
         dagboekTableView.getItems().setAll(aquarium.getDagboek());
         dagboekTableView.getSortOrder().add(dagKolom);
         dagboekTableView.getSortOrder().add(tijdKolom);
+    }
+
+    public Callback<TableColumn, TableCell> getCellfactory() {
+        Callback<TableColumn, TableCell> cellFactory =
+                new Callback<TableColumn, TableCell>() {
+                    public TableCell call(TableColumn p) {
+                        TableCell cell = new TableCell<AquariumDagOpname, String>() {
+                            @Override
+                            public void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                setText(empty ? null : getString());
+                                setGraphic(null);
+                            }
+
+                            private String getString() {
+                                return getItem() == null ? "" : getItem().toString();
+                            }
+                        };
+
+                        cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (event.getClickCount() > 1) {
+                                    showChart(cell.getTableColumn());
+                                }
+                            }
+                        });
+                        return cell;
+                    }
+                };
+        return cellFactory;
+    }
+
+    public void showChart(TableColumn column){
+        String variabel = column.getText();
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("waardeGeschiedenis.fxml"));
+        ChartController controller = new ChartController(variabel,aquarium.getDagboek());
+        loader.setController(controller);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, 800, 480);
+        stage.setScene(scene);
+        stage.initOwner(nieuweInvoer.getScene().getWindow());
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.show();
+
+
     }
 }
