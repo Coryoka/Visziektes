@@ -33,7 +33,6 @@ public class AquariumDagOpnameDAO extends DAO {
             } else if(opnames.get(dag).getOpname().getTijd().equals(opname.getTijd())){
                 opnames.get(dag).getOpname().addMeting(meting);
             } else {
-
                 opnames.put(dag, new AquariumDagOpname(dag, opname));
             }
         }
@@ -92,7 +91,7 @@ public class AquariumDagOpnameDAO extends DAO {
             }
         }
 
-        if (opname.getOpmerking() != null){
+        if (opname.getOpmerking() != null && !opname.getOpmerking().equals("")){
             con.prepareStatement("INSERT INTO Opmerking VALUES("+aquariumId +", '" + dag.toString() + "', '" + opname.getTijd().toString() + "', '" + opname.getOpmerking() + "')").executeUpdate();
         }
     }
