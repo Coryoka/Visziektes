@@ -59,12 +59,11 @@ public class DagboekController implements Initializable {
         }
 
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        dagKolom.setCellValueFactory(new PropertyValueFactory<AquariumDagOpname, String>("dag"));
-//        dagKolom.setCellValueFactory( AquariumDagOpname -> {
-//            SimpleStringProperty property = new SimpleStringProperty();
-//            property.setValue(format.format(AquariumDagOpname.getValue().getDag()));
-//            return property;
-//        });
+        dagKolom.setCellValueFactory( AquariumDagOpname -> {
+            SimpleStringProperty property = new SimpleStringProperty();
+            property.setValue(format.format(AquariumDagOpname.getValue().getDag()));
+            return property;
+        });
         tijdKolom.setCellValueFactory(new PropertyValueFactory<AquariumDagOpname, String>("tijd"));
         opmerkingKolom.setCellValueFactory(new PropertyValueFactory<String, AquariumDagOpname>("opmerking"));
         voeding.setCellValueFactory(new PropertyValueFactory<String, AquariumDagOpname>("voeding"));
