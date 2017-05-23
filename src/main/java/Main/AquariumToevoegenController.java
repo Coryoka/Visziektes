@@ -77,8 +77,7 @@ public class AquariumToevoegenController implements Initializable {
                         stage.show();
                     } catch (SQLException e) {
                         e.printStackTrace();
-                    }
-                }
+                    }}
             });
         } catch (IOException e) {
             e.printStackTrace();
