@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import jfxtras.scene.control.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="55.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <ChoiceBox fx:id="vissen" layoutX="92.0" layoutY="77.0" prefWidth="150.0" />
+      <Text layoutX="92.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vissoort" />
+      <Text layoutX="289.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datum toevoeging" />
+      <LocalDateTimeTextField fx:id="datumToevoeging" layoutX="289.0" layoutY="77.0" prefHeight="27.0" prefWidth="180.0" />
+      <Text layoutX="92.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aantal vissen" />
+      <TextField fx:id="aantalVissen" layoutX="92.0" layoutY="159.0" />
+      <Text layoutX="289.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leverancier" />
+      <TextArea fx:id="leverancier" layoutX="289.0" layoutY="159.0" prefHeight="82.0" prefWidth="233.0" />
+      <Button fx:id="opslaan" layoutX="439.0" layoutY="264.0" mnemonicParsing="false" text="toevoegen" />
+   </children>
+</Pane>

@@ -14,7 +14,7 @@ public class Aquarium {
     private int aqBreedte;
     private int aqHoogte;
     private ArrayList<AquariumDagOpname> dagboek;
-
+    private ArrayList<VissenInAquarium> vissenInAquarium;
     public Aquarium(ArrayList<AquariumDagOpname> dagboek) {
         this.dagboek = dagboek;
     }
@@ -78,6 +78,14 @@ public class Aquarium {
 
     public int getAqHoogte() {
         return aqHoogte;
+    }
+
+    public ArrayList<VissenInAquarium> getVissenInAquarium() {
+        return vissenInAquarium;
+    }
+
+    public void setVissenInAquarium(ArrayList<VissenInAquarium> vissenInAquarium) {
+        this.vissenInAquarium = vissenInAquarium;
     }
 
     public ArrayList<String> metingVariabelen() {

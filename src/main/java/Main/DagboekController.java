@@ -3,6 +3,7 @@ package Main;
 import Domain.*;
 import datasource.AquariumDAO;
 import datasource.AquariumDagOpnameDAO;
+import datasource.VissenDAO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +24,7 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.BatchUpdateException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -34,6 +36,7 @@ import java.util.ResourceBundle;
 
 public class DagboekController implements Initializable {
     private AquariumDAO aquariumDAO;
+    private VissenDAO vissenDAO;
     @FXML TableView<AquariumDagOpname> dagboekTableView;
     @FXML TableColumn<AquariumDagOpname, String> dagKolom;
     @FXML TableColumn<AquariumDagOpname, String> tijdKolom;
@@ -44,6 +47,15 @@ public class DagboekController implements Initializable {
     private int aquariumId;
     private Aquarium aquarium;
 
+    @FXML TableView<VissenInAquarium> vissenInAquarium;
+    @FXML TableColumn<VissenInAquarium, String> visGenus;
+    @FXML TableColumn<VissenInAquarium, String> vissoort;
+    @FXML TableColumn<VissenInAquarium, String> datumToegevoegd;
+    @FXML TableColumn<VissenInAquarium, String> aantalHuidigeVissen;
+    @FXML TableColumn<VissenInAquarium, String> aantalOorspronkelijkeVissen;
+    @FXML TableColumn<VissenInAquarium, String> leverancier;
+    @FXML Button vissenToevoegen;
+
     public DagboekController(int aquariumId) {
         this.aquariumId = aquariumId;
     }
@@ -52,11 +64,13 @@ public class DagboekController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             aquariumDAO = new AquariumDAO();
+            vissenDAO = new VissenDAO();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
 
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         dagKolom.setCellValueFactory( AquariumDagOpname -> {
@@ -69,28 +83,57 @@ public class DagboekController implements Initializable {
         voeding.setCellValueFactory(new PropertyValueFactory<String, AquariumDagOpname>("voeding"));
 
         laadTableView();
+        laadVissenTableView();
 
 
         nieuweInvoer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("dagboekInvoer.fxml"));
                 NieuwInvoerController controller = new NieuwInvoerController(aquariumId, getThis());
-                loader.setController(controller);
-                Parent root = null;
-                try {
-                    root = loader.load();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Stage stage = new Stage();
-                Scene scene = new Scene(root, 800, 480);
-                stage.setScene(scene);
-                stage.initOwner(nieuweInvoer.getScene().getWindow());
-                stage.initModality(Modality.WINDOW_MODAL);
-                stage.show();
+                openPane(nieuweInvoer, "dagboekInvoer.fxml", controller);
             }
         });
+
+        vissenToevoegen.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                VisToevoegenController controller = new VisToevoegenController(getThis(), vissenDAO);
+                openPane(vissenToevoegen, "nieuweVissen.fxml", controller);
+            }
+        });
+    }
+    private void openPane(Button button, String fxml, Initializable initializable) {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxml));
+        loader.setController(initializable);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, 800, 480);
+        stage.setScene(scene);
+        stage.initOwner(button.getScene().getWindow());
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.show();
+    }
+
+    public void laadVissenTableView() {
+        visGenus.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("genus"));
+        vissoort.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("soort"));
+        datumToegevoegd.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("datumToevoeging"));
+        aantalHuidigeVissen.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("huidigeVissen"));
+        aantalOorspronkelijkeVissen.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("oorspronkelijkeVissen"));
+        leverancier.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("leverancier"));
+        datumToegevoegd.setSortType(TableColumn.SortType.DESCENDING);
+        try {
+            aquarium.setVissenInAquarium(vissenDAO.getVissenVanAquarium(aquariumId));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        vissenInAquarium.getItems().setAll(aquarium.getVissenInAquarium());
+        vissenInAquarium.getSortOrder().add(datumToegevoegd);
     }
 
     public DagboekController getThis() {
@@ -176,5 +219,9 @@ public class DagboekController implements Initializable {
         stage.show();
 
 
+    }
+
+    public int getAquariumId() {
+        return aquariumId;
     }
 }
