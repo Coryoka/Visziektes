@@ -86,20 +86,14 @@ public class DagboekController implements Initializable {
         laadVissenTableView();
 
 
-        nieuweInvoer.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                NieuwInvoerController controller = new NieuwInvoerController(aquariumId, getThis());
-                openPane(nieuweInvoer, "dagboekInvoer.fxml", controller);
-            }
+        nieuweInvoer.setOnAction(event -> {
+            NieuwInvoerController controller = new NieuwInvoerController(aquariumId, getThis());
+            openPane(nieuweInvoer, "dagboekInvoer.fxml", controller);
         });
 
-        vissenToevoegen.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                VisToevoegenController controller = new VisToevoegenController(getThis(), vissenDAO);
-                openPane(vissenToevoegen, "nieuweVissen.fxml", controller);
-            }
+        vissenToevoegen.setOnAction(event -> {
+            VisToevoegenController controller = new VisToevoegenController(getThis(), vissenDAO);
+            openPane(vissenToevoegen, "nieuweVissen.fxml", controller);
         });
     }
     private void openPane(Button button, String fxml, Initializable initializable) {
@@ -120,12 +114,12 @@ public class DagboekController implements Initializable {
     }
 
     public void laadVissenTableView() {
-        visGenus.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("genus"));
-        vissoort.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("soort"));
-        datumToegevoegd.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("datumToevoeging"));
-        aantalHuidigeVissen.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("huidigeVissen"));
-        aantalOorspronkelijkeVissen.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("oorspronkelijkeVissen"));
-        leverancier.setCellValueFactory(new PropertyValueFactory<VissenInAquarium, String>("leverancier"));
+        visGenus.setCellValueFactory(new PropertyValueFactory<>("genus"));
+        vissoort.setCellValueFactory(new PropertyValueFactory<>("soort"));
+        datumToegevoegd.setCellValueFactory(new PropertyValueFactory<>("datumToevoeging"));
+        aantalHuidigeVissen.setCellValueFactory(new PropertyValueFactory<>("huidigeVissen"));
+        aantalOorspronkelijkeVissen.setCellValueFactory(new PropertyValueFactory<>("oorspronkelijkeVissen"));
+        leverancier.setCellValueFactory(new PropertyValueFactory<>("leverancier"));
         datumToegevoegd.setSortType(TableColumn.SortType.DESCENDING);
         try {
             aquarium.setVissenInAquarium(vissenDAO.getVissenVanAquarium(aquariumId));
@@ -157,7 +151,7 @@ public class DagboekController implements Initializable {
                 kolommen.add(new TableColumn(variabel));
             }
         }
-        dagboekTableView.getColumns().addAll((Collection<? extends TableColumn<AquariumDagOpname, ?>>) kolommen);
+        dagboekTableView.getColumns().addAll(kolommen);
 
         for(TableColumn kolom: kolommen){
             kolom.setCellFactory(getCellfactory());
@@ -186,12 +180,9 @@ public class DagboekController implements Initializable {
                             }
                         };
 
-                        cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                if (event.getClickCount() > 1) {
-                                    showChart(cell.getTableColumn());
-                                }
+                        cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                            if (event.getClickCount() > 1) {
+                                showChart(cell.getTableColumn());
                             }
                         });
                         return cell;
