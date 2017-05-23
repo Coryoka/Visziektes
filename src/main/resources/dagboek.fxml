@@ -17,7 +17,7 @@
         </columns>
       </TableView>
       <Button fx:id="nieuweInvoer" layoutX="899.0" layoutY="73.0" mnemonicParsing="false" text="Nieuwe invoer" />
-      <TableView fx:id="vissenInAquarium" layoutX="68.0" layoutY="483.0" prefHeight="208.0" prefWidth="929.0">
+      <TableView fx:id="vissenInAquarium" layoutX="59.0" layoutY="483.0" prefHeight="208.0" prefWidth="938.0">
         <columns>
           <TableColumn fx:id="visGenus" prefWidth="75.0" text="Vis genus" />
           <TableColumn fx:id="vissoort" prefWidth="75.0" text="Vissoort" />
@@ -28,5 +28,6 @@
         </columns>
       </TableView>
       <Button fx:id="vissenToevoegen" layoutX="873.0" layoutY="444.0" mnemonicParsing="false" text="Vissen toevoegen" />
+      <Button fx:id="terug" layoutX="61.0" layoutY="46.0" mnemonicParsing="false" text="terug" />
    </children>
 </Pane>

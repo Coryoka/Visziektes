@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable{
     private Gebruiker gebruiker;
     @FXML Button showAquariums;
+    @FXML Button terug;
 
     public Controller(Gebruiker gebruiker) {
         this.gebruiker = gebruiker;
@@ -24,6 +25,22 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        terug.setOnAction(event -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("login.fxml"));
+            Stage stage = (Stage)terug.getScene().getWindow();
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Scene scene = new Scene(root, 1280, 720);
+            stage.setScene(scene);
+            stage.show();
+        });
+
+
+
         showAquariums.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

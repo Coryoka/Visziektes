@@ -44,20 +44,23 @@ public class DagboekController implements Initializable {
     @FXML TableColumn<String, AquariumDagOpname> opmerkingKolom;
     @FXML TableColumn<String, AquariumDagOpname> voeding;
     @FXML Button nieuweInvoer;
+    @FXML Button terug;
     private int aquariumId;
     private Aquarium aquarium;
+    private Gebruiker gebruiker;
 
     @FXML TableView<VissenInAquarium> vissenInAquarium;
-    @FXML TableColumn<VissenInAquarium, String> visGenus;
-    @FXML TableColumn<VissenInAquarium, String> vissoort;
-    @FXML TableColumn<VissenInAquarium, String> datumToegevoegd;
-    @FXML TableColumn<VissenInAquarium, String> aantalHuidigeVissen;
-    @FXML TableColumn<VissenInAquarium, String> aantalOorspronkelijkeVissen;
-    @FXML TableColumn<VissenInAquarium, String> leverancier;
+    @FXML TableColumn visGenus;
+    @FXML TableColumn vissoort;
+    @FXML TableColumn datumToegevoegd;
+    @FXML TableColumn aantalHuidigeVissen;
+    @FXML TableColumn aantalOorspronkelijkeVissen;
+    @FXML TableColumn leverancier;
     @FXML Button vissenToevoegen;
 
-    public DagboekController(int aquariumId) {
+    public DagboekController(int aquariumId, Gebruiker gebruiker) {
         this.aquariumId = aquariumId;
+        this.gebruiker = gebruiker;
     }
 
     @Override
@@ -92,8 +95,25 @@ public class DagboekController implements Initializable {
         });
 
         vissenToevoegen.setOnAction(event -> {
-            VisToevoegenController controller = new VisToevoegenController(getThis(), vissenDAO);
+            VisToevoegenController controller = new VisToevoegenController(getThis(), vissenDAO, null);
             openPane(vissenToevoegen, "nieuweVissen.fxml", controller);
+        });
+
+        terug.setOnAction(event -> {
+            AquariumsController controller = new AquariumsController(gebruiker);
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("aquariums.fxml"));
+            loader.setController(controller);
+            Stage stage = (Stage)terug.getScene().getWindow();
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Scene scene = new Scene(root, 1280, 720);
+            stage.setScene(scene);
+            stage.show();
+
         });
     }
     private void openPane(Button button, String fxml, Initializable initializable) {
@@ -114,11 +134,17 @@ public class DagboekController implements Initializable {
     }
 
     public void laadVissenTableView() {
+        visGenus.setCellFactory(getCellfactoryVis());
         visGenus.setCellValueFactory(new PropertyValueFactory<>("genus"));
+        vissoort.setCellFactory(getCellfactoryVis());
         vissoort.setCellValueFactory(new PropertyValueFactory<>("soort"));
+        datumToegevoegd.setCellFactory(getCellfactoryVis());
         datumToegevoegd.setCellValueFactory(new PropertyValueFactory<>("datumToevoeging"));
+        aantalHuidigeVissen.setCellFactory(getCellfactoryVis());
         aantalHuidigeVissen.setCellValueFactory(new PropertyValueFactory<>("huidigeVissen"));
+        aantalOorspronkelijkeVissen.setCellFactory(getCellfactoryVis());
         aantalOorspronkelijkeVissen.setCellValueFactory(new PropertyValueFactory<>("oorspronkelijkeVissen"));
+        leverancier.setCellFactory(getCellfactoryVis());
         leverancier.setCellValueFactory(new PropertyValueFactory<>("leverancier"));
         datumToegevoegd.setSortType(TableColumn.SortType.DESCENDING);
         try {
@@ -183,6 +209,35 @@ public class DagboekController implements Initializable {
                         cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
                             if (event.getClickCount() > 1) {
                                 showChart(cell.getTableColumn());
+                            }
+                        });
+                        return cell;
+                    }
+                };
+        return cellFactory;
+    }
+
+    public Callback<TableColumn, TableCell> getCellfactoryVis() {
+        Callback<TableColumn, TableCell> cellFactory =
+                new Callback<TableColumn, TableCell>() {
+                    public TableCell call(TableColumn p) {
+                        TableCell cell = new TableCell<VissenInAquarium, Object>() {
+                            @Override
+                            public void updateItem(Object item, boolean empty) {
+                                super.updateItem(item, empty);
+                                setText(empty ? null : getString());
+                                setGraphic(null);
+                            }
+
+                            private String getString() {
+                                return getItem() == null ? "" : getItem().toString();
+                            }
+                        };
+
+                        cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                            if (event.getClickCount() > 1) {
+                                VisToevoegenController controller = new VisToevoegenController(getThis(), vissenDAO, vissenInAquarium.getSelectionModel().getSelectedItem());
+                                openPane(nieuweInvoer, "nieuweVissen.fxml", controller);
                             }
                         });
                         return cell;

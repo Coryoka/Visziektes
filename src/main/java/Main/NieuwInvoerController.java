@@ -1,9 +1,6 @@
 package Main;
 
-import Domain.AquariumDagOpname;
-import Domain.Meting;
-import Domain.Opname;
-import Domain.Voeding;
+import Domain.*;
 import datasource.AquariumDagOpnameDAO;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

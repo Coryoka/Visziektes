@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -29,6 +30,7 @@ public class AquariumsController implements Initializable {
     @FXML TableColumn<Aquarium, String> watertype;
     @FXML TableColumn<Aquarium, Integer> verversing;
     @FXML TableColumn<Aquarium, Integer> procentPerVerversing;
+    @FXML Button terug;
 
     public AquariumsController(Gebruiker gebruiker) {
         this.gebruiker = gebruiker;
@@ -46,6 +48,21 @@ public class AquariumsController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        terug.setOnAction(event -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("home.fxml"));
+            Controller controller = new Controller(gebruiker);
+            loader.setController(controller);
+            Stage stage = (Stage)terug.getScene().getWindow();
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Scene scene = new Scene(root, 1280, 720);
+            stage.setScene(scene);
+            stage.show();
+        });
 
         aquariums.setRowFactory( tv -> {
             TableRow<Aquarium> row = new TableRow<>();
@@ -53,7 +70,7 @@ public class AquariumsController implements Initializable {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Aquarium rowData = row.getItem();
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("dagboek.fxml"));
-                    DagboekController controller = new DagboekController(aquariums.getSelectionModel().getSelectedItem().getAquariumId());
+                    DagboekController controller = new DagboekController(aquariums.getSelectionModel().getSelectedItem().getAquariumId(), gebruiker);
                     loader.setController(controller);
                     Stage stage = (Stage)row.getScene().getWindow();
                     Parent root = null;

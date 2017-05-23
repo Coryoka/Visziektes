@@ -42,7 +42,11 @@ public class VissenInAquarium {
         return vis.getSoort();
     }
 
-    public Timestamp getDatumToevoeging() {
+    public String getDatumToevoeging() {
+        return datumToevoeging.toString();
+    }
+
+    public Timestamp getDatumToegevoegd() {
         return datumToevoeging;
     }
 
@@ -56,5 +60,29 @@ public class VissenInAquarium {
 
     public String getLeverancier() {
         return leverancier;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public void setVis(Vis vis) {
+        this.vis = vis;
+    }
+
+    public void setDatumToevoeging(Timestamp datumToevoeging) {
+        this.datumToevoeging = datumToevoeging;
+    }
+
+    public void setHuidigeVissen(int huidigeVissen) {
+        this.huidigeVissen = huidigeVissen;
+    }
+
+    public void setOorspronkelijkeVissen(int oorspronkelijkeVissen) {
+        this.oorspronkelijkeVissen = oorspronkelijkeVissen;
+    }
+
+    public void setLeverancier(String leverancier) {
+        this.leverancier = leverancier;
     }
 }
