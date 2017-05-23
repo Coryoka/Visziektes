@@ -59,7 +59,6 @@ public class DagboekController implements Initializable {
         }
 
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        dagKolom.setCellValueFactory(new PropertyValueFactory<AquariumDagOpname, String>("dag"));
         dagKolom.setCellValueFactory( AquariumDagOpname -> {
             SimpleStringProperty property = new SimpleStringProperty();
             property.setValue(format.format(AquariumDagOpname.getValue().getDag()));
