@@ -3,11 +3,14 @@ package Main;
 import Domain.Aquarium;
 import Domain.Gebruiker;
 import datasource.AquariumDAO;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -29,6 +32,7 @@ public class AquariumsController implements Initializable {
     @FXML TableColumn<Aquarium, String> watertype;
     @FXML TableColumn<Aquarium, Integer> verversing;
     @FXML TableColumn<Aquarium, Integer> procentPerVerversing;
+    @FXML Button AqNieuw;
 
     public AquariumsController(Gebruiker gebruiker) {
         this.gebruiker = gebruiker;
@@ -46,7 +50,25 @@ public class AquariumsController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        AqNieuw.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Aquarium toevogen.fxml"));
+                AquariumToevoegenController controller = new AquariumToevoegenController(gebruiker);
+                loader.setController(controller);
+                Stage stage = (Stage)AqNieuw.getScene().getWindow();
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Scene scene = new Scene(root, 1280, 720);
+                stage.setScene(scene);
+                stage.show();
 
+            }
+        });
         aquariums.setRowFactory( tv -> {
             TableRow<Aquarium> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
