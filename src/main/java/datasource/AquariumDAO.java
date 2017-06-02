@@ -49,4 +49,9 @@ public class AquariumDAO extends DAO {
 
         return aquariums.get(0);
     }
+
+    public void InsertAquarium(String Gebruikersnaam,int VolumeInLiters, int Tempratuur, String AqWaterType, int AantalverversingenPerWeek, int ProcentwaterPerVerversing, int AqLengteInCm, int AqBreedteinCm, int AqHoogteInCm) throws SQLException {
+        checkDbConnection();
+        con.prepareStatement("INSERT INTO Aquarium VALUES("+Gebruikersnaam+ ","+VolumeInLiters+","+Tempratuur+","+AqWaterType+","+AantalverversingenPerWeek+","+ProcentwaterPerVerversing+","+AqLengteInCm+","+AqBreedteinCm+","+AqHoogteInCm+")").executeUpdate();
+    }
 }

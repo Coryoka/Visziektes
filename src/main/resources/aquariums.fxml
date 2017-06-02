@@ -16,6 +16,7 @@
             <TableColumn fx:id="procentPerVerversing" prefWidth="159.42401123046875" text="procent per verversing" />
         </columns>
       </TableView>
+      <Button id="AqNieuw" layoutX="1002.0" layoutY="61.0" mnemonicParsing="false" text="Nieuw aquarium" />
       <Button fx:id="terug" layoutX="42.0" layoutY="36.0" mnemonicParsing="false" text="Terug" />
    </children>
 </Pane>

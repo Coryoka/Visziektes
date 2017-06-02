@@ -95,8 +95,7 @@ public class Aquarium {
                 for (Meting meting : dagOpname.getOpname().getMetingen()) {
                     if (!variabelen.contains(meting.getVariabeleId())) {
                         variabelen.add(meting.getVariabeleId());
-                    }
-                }
+                    }                }
             }
         }
         return variabelen;
