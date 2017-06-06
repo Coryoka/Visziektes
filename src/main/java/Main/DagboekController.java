@@ -58,6 +58,15 @@ public class DagboekController implements Initializable {
     @FXML TableColumn leverancier;
     @FXML Button vissenToevoegen;
 
+    @FXML TableView<Vis> individueleVissen;
+    @FXML TableColumn naamVis;
+    @FXML TableColumn geboorteJaar;
+    @FXML TableColumn opmerkingVis;
+    @FXML Button nieuweVis;
+
+
+
+
     public DagboekController(int aquariumId, Gebruiker gebruiker) {
         this.aquariumId = aquariumId;
         this.gebruiker = gebruiker;
@@ -87,6 +96,7 @@ public class DagboekController implements Initializable {
 
         laadTableView();
         laadVissenTableView();
+        laadIndividueleVissenTableView();
 
 
         nieuweInvoer.setOnAction(event -> {
@@ -115,7 +125,44 @@ public class DagboekController implements Initializable {
             stage.show();
 
         });
+
+        nieuweVis.setOnAction(event -> {
+            if(vissenInAquarium.getSelectionModel().getSelectedItem() != null) {
+                VissenInAquarium vissenInAquarium1 = vissenInAquarium.getSelectionModel().getSelectedItem();
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("nieuweIndividuelevis.fxml"));
+                NieuweIndividueleVisController controller = new NieuweIndividueleVisController(vissenInAquarium1, aquariumId, vissenDAO, getThis());
+                loader.setController(controller);
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Stage stage = new Stage();
+                Scene scene = new Scene(root, 800, 480);
+                stage.setScene(scene);
+                stage.initOwner(nieuweInvoer.getScene().getWindow());
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.show();
+            }
+        });
+
     }
+
+    public void laadIndividueleVissenTableView() {
+        naamVis.setCellFactory(getCellfactoryIndividueleVissen());
+        naamVis.setCellValueFactory(new PropertyValueFactory<>("naam"));
+        geboorteJaar.setCellFactory(getCellfactoryIndividueleVissen());
+        geboorteJaar.setCellValueFactory(new PropertyValueFactory<>("geboortejaar"));
+        opmerkingVis.setCellFactory(getCellfactoryIndividueleVissen());
+        opmerkingVis.setCellValueFactory(new PropertyValueFactory<>("opmerking"));
+        try {
+            individueleVissen.getItems().setAll(vissenDAO.individueleVissenBijAquarium(aquariumId));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void openPane(Button button, String fxml, Initializable initializable) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxml));
         loader.setController(initializable);
@@ -216,6 +263,33 @@ public class DagboekController implements Initializable {
                 };
         return cellFactory;
     }
+    public Callback<TableColumn, TableCell> getCellfactoryIndividueleVissen() {
+        Callback<TableColumn, TableCell> cellFactory =
+                new Callback<TableColumn, TableCell>() {
+                    public TableCell call(TableColumn p) {
+                        TableCell cell = new TableCell<Vis, Object>() {
+                            @Override
+                            public void updateItem(Object item, boolean empty) {
+                                super.updateItem(item, empty);
+                                setText(empty ? null : getString());
+                                setGraphic(null);
+                            }
+
+                            private String getString() {
+                                return getItem() == null ? "" : getItem().toString();
+                            }
+                        };
+
+                        cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                            if (event.getClickCount() > 1) {
+
+                            }
+                        });
+                        return cell;
+                    }
+                };
+        return cellFactory;
+    }
 
     public Callback<TableColumn, TableCell> getCellfactoryVis() {
         Callback<TableColumn, TableCell> cellFactory =
@@ -236,8 +310,8 @@ public class DagboekController implements Initializable {
 
                         cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
                             if (event.getClickCount() > 1) {
-                                VisToevoegenController controller = new VisToevoegenController(getThis(), vissenDAO, vissenInAquarium.getSelectionModel().getSelectedItem());
-                                openPane(nieuweInvoer, "nieuweVissen.fxml", controller);
+                                VisToevoegenController controller = new VisToevoegenController(getThis(),vissenDAO,vissenInAquarium.getSelectionModel().getSelectedItem());
+                                openPane(nieuweInvoer,"nieuweVissen.fxml", controller);
                             }
                         });
                         return cell;

@@ -66,10 +66,11 @@ public class AquariumsController implements Initializable {
             stage.setScene(scene);
             stage.show();
         });
+
         AqNieuw.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Aquarium toevogen.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Aquarium toevoegen.fxml"));
                 AquariumToevoegenController controller = new AquariumToevoegenController(gebruiker);
                 loader.setController(controller);
                 Stage stage = (Stage)AqNieuw.getScene().getWindow();

@@ -1,10 +1,10 @@
 package Domain;
 
-public class Vis {
+public class Vissoort {
     private String genus;
     private String soort;
 
-    public Vis(String genus, String soort) {
+    public Vissoort(String genus, String soort) {
         this.genus = genus;
         this.soort = soort;
     }

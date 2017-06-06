@@ -1,10 +1,8 @@
 package Main;
 
-import Domain.Vis;
+import Domain.Vissoort;
 import Domain.VissenInAquarium;
 import datasource.VissenDAO;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -23,11 +21,12 @@ public class VisToevoegenController implements Initializable {
     private DagboekController dagboekController;
     private VissenDAO vissenDAO;
     private VissenInAquarium vissenInAquarium;
-    @FXML ChoiceBox<Vis> vissen;
+    @FXML ChoiceBox<Vissoort> vissen;
     @FXML LocalDateTimeTextField datumToevoeging;
     @FXML TextField aantalVissen;
     @FXML TextArea leverancier;
     @FXML Button opslaan;
+    @FXML Button verwijderen;
 
     public VisToevoegenController(DagboekController dagboekController, VissenDAO vissenDAO, VissenInAquarium vissenInAquarium) {
         this.dagboekController = dagboekController;
@@ -37,7 +36,7 @@ public class VisToevoegenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Vis> vissenlist = new ArrayList<>();
+        ArrayList<Vissoort> vissenlist = new ArrayList<>();
         try {
             vissenlist.addAll(vissenDAO.alleVissen());
         } catch (SQLException e) {
@@ -45,13 +44,12 @@ public class VisToevoegenController implements Initializable {
         }
 
         if(vissenInAquarium != null){
-            Vis vis = null;
-            for(Vis vis1: vissenlist){
+            Vissoort vis = null;
+            for(Vissoort vis1: vissenlist){
                 if(vis1.getGenus().equals(vissenInAquarium.getGenus()) && vis1.getSoort().equals(vissenInAquarium.getSoort())){
                     vis = vis1;
                 }
             }
-            System.out.println(vissenInAquarium.getGroupId());
             vissen.getItems().setAll(vissenlist);
             vissen.setValue(vis);
             vissen.valueProperty().setValue(vis);
@@ -63,27 +61,43 @@ public class VisToevoegenController implements Initializable {
         }
 
         opslaan.setOnAction(event -> {
+            String error = null;
             if(vissenInAquarium == null) {
                 if (vissen.getSelectionModel().getSelectedItem() != null && datumToevoeging.getLocalDateTime() != null
                         && aantalVissen != null && leverancier != null) {
                     VissenInAquarium vissenInAquarium = getVissenInAquarium();
                     try {
-                        vissenDAO.saveVisInAquarium(dagboekController.getAquariumId(), vissenInAquarium);
+                        error = vissenDAO.saveVisInAquarium(dagboekController.getAquariumId(), vissenInAquarium);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
+                    showWarning(error);
                     dagboekController.laadVissenTableView();
                     closeStage();
                 }
             } else {
+
                 try {
                     VissenInAquarium vissenInAquarium1 = getVissenInAquarium();
                     vissenInAquarium1.setGroupId(vissenInAquarium.getGroupId());
-                    vissenDAO.updateVisInAquarium(vissenInAquarium1);
+                    error = vissenDAO.updateVisInAquarium(vissenInAquarium1);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+                showWarning(error);
                 dagboekController.laadVissenTableView();
+                closeStage();
+            }
+        });
+
+        verwijderen.setOnAction(event -> {
+            if(vissenInAquarium != null){
+                try {
+                    vissenDAO.deleteVissenInAquarium(vissenInAquarium);
+                    dagboekController.laadVissenTableView();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 closeStage();
             }
         });
@@ -100,5 +114,15 @@ public class VisToevoegenController implements Initializable {
     public void closeStage() {
         Stage stage = (Stage) opslaan.getScene().getWindow();
         stage.close();
+    }
+
+    public void showWarning(String error) {
+        if (error != null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Waarschuwing");
+            alert.setHeaderText(null);
+            alert.setContentText(error);
+            alert.showAndWait();
+        }
     }
 }

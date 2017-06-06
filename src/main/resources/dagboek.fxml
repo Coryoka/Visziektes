@@ -17,7 +17,7 @@
         </columns>
       </TableView>
       <Button fx:id="nieuweInvoer" layoutX="899.0" layoutY="73.0" mnemonicParsing="false" text="Nieuwe invoer" />
-      <TableView fx:id="vissenInAquarium" layoutX="59.0" layoutY="483.0" prefHeight="208.0" prefWidth="938.0">
+      <TableView fx:id="vissenInAquarium" layoutX="59.0" layoutY="483.0" prefHeight="208.0" prefWidth="747.0">
         <columns>
           <TableColumn fx:id="visGenus" prefWidth="75.0" text="Vis genus" />
           <TableColumn fx:id="vissoort" prefWidth="75.0" text="Vissoort" />
@@ -27,7 +27,17 @@
             <TableColumn fx:id="leverancier" prefWidth="101.2503662109375" text="Leverancier" />
         </columns>
       </TableView>
-      <Button fx:id="vissenToevoegen" layoutX="873.0" layoutY="444.0" mnemonicParsing="false" text="Vissen toevoegen" />
+      <Button fx:id="vissenToevoegen" layoutX="678.0" layoutY="442.0" mnemonicParsing="false" text="Vissen toevoegen" />
       <Button fx:id="terug" layoutX="61.0" layoutY="46.0" mnemonicParsing="false" text="terug" />
+      <TableView fx:id="individueleVissen" layoutX="823.0" layoutY="483.0" prefHeight="208.0" prefWidth="433.0">
+        <columns>
+          <TableColumn fx:id="naamVis" prefWidth="75.0" text="Vis naam" />
+          <TableColumn fx:id="geboorteJaar" prefWidth="94.0" text="Geboorte jaar" />
+            <TableColumn fx:id="opmerkingVis" prefWidth="79.0" text="Opmerking" />
+        </columns>
+      </TableView>
+      <Text layoutX="59.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vissen in dit aquarium" />
+      <Text layoutX="823.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Individuele vissen" />
+      <Button fx:id="nieuweVis" layoutX="1173.0" layoutY="442.0" mnemonicParsing="false" text="nieuwe vis" />
    </children>
 </Pane>

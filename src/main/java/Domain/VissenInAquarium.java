@@ -4,13 +4,13 @@ import java.sql.Timestamp;
 
 public class VissenInAquarium {
     private int groupId;
-    private Vis vis;
+    private Vissoort vis;
     private Timestamp datumToevoeging;
     private int huidigeVissen;
     private int oorspronkelijkeVissen;
     private String leverancier;
 
-    public VissenInAquarium(int groupId, Vis vis, Timestamp datumToevoeging, int huidigeVissen, int oorspronkelijkeVissen, String leverancier) {
+    public VissenInAquarium(int groupId, Vissoort vis, Timestamp datumToevoeging, int huidigeVissen, int oorspronkelijkeVissen, String leverancier) {
         this.groupId = groupId;
         this.vis = vis;
         this.datumToevoeging = datumToevoeging;
@@ -19,7 +19,7 @@ public class VissenInAquarium {
         this.leverancier = leverancier;
     }
 
-    public VissenInAquarium(Vis vis, Timestamp datumToevoeging, int huidigeVissen, String leverancier) {
+    public VissenInAquarium(Vissoort vis, Timestamp datumToevoeging, int huidigeVissen, String leverancier) {
         this.vis = vis;
         this.datumToevoeging = datumToevoeging;
         this.huidigeVissen = huidigeVissen;
@@ -30,7 +30,7 @@ public class VissenInAquarium {
         return groupId;
     }
 
-    public Vis getVis() {
+    public Vissoort getVis() {
         return vis;
     }
 
@@ -66,7 +66,7 @@ public class VissenInAquarium {
         this.groupId = groupId;
     }
 
-    public void setVis(Vis vis) {
+    public void setVis(Vissoort vis) {
         this.vis = vis;
     }
 
