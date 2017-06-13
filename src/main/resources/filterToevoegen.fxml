@@ -12,12 +12,8 @@
         <TextField fx:id="naamApparaat" layoutX="52.0" layoutY="100.0" />
         <Text layoutX="52.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date mounted" />
         <LocalDateTimeTextField fx:id="installatieDatum" layoutX="52.0" layoutY="187.0" />
-        <Text layoutX="300.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter medium installment date" />
-        <Button layoutX="419.0" layoutY="263.0" mnemonicParsing="false" text="Save" />
+        <Button fx:id="ButtonSave" layoutX="419.0" layoutY="263.0" mnemonicParsing="false" text="Save" />
       <LocalDateTimeTextField fx:id="laatstSchoongemaakt" layoutX="52.0" layoutY="263.0" />
       <Text layoutX="52.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date last cleaned" />
-      <LocalDateTimeTextField fx:id="mediumInstallatieDatum" layoutX="300.0" layoutY="100.0" />
-      <Text layoutX="300.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medium name" />
-      <TextField fx:id="mediumNaam" layoutX="300.0" layoutY="187.0" />
     </children>
 </Pane>

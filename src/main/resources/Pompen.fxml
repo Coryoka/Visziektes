@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="63.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pumps" />
+      <TableView fx:id="PompenTableView" layoutX="63.0" layoutY="148.0" prefHeight="285.0" prefWidth="938.0">
+         <columns>
+            <TableColumn fx:id="PompDatumToevoeging" prefWidth="126.33332824707031" text="Installation Date" />
+            <TableColumn fx:id="PompNaam" minWidth="236.6666717529297" prefWidth="472.0" text="Device" />
+            <TableColumn fx:id="PompAquariumID" prefWidth="163.0" text="Aquarium ID" />
+            <TableColumn fx:id="PompLaatstSchoongemaakt" prefWidth="175.0" text="Last cleaned" />
+         </columns>
+      </TableView>
+      <Button fx:id="nieuweInvoer" layoutX="899.0" layoutY="73.0" mnemonicParsing="false" text="New Pump" />
+      <Button fx:id="terug" layoutX="61.0" layoutY="46.0" mnemonicParsing="false" text="Back" />
+      <Accordion />
+   </children>
+</Pane>

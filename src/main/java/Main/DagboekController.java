@@ -2,7 +2,6 @@ package Main;
 
 import Domain.*;
 import datasource.AquariumDAO;
-import datasource.AquariumDagOpnameDAO;
 import datasource.VissenDAO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -24,14 +23,10 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.BatchUpdateException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class DagboekController implements Initializable {
@@ -57,6 +52,10 @@ public class DagboekController implements Initializable {
     @FXML TableColumn aantalOorspronkelijkeVissen;
     @FXML TableColumn leverancier;
     @FXML Button vissenToevoegen;
+    @FXML Button ButtonMeters;
+    @FXML Button ButtonPompen;
+    @FXML Button ButtonFilters;
+    @FXML Button ButtonLichten;
 
     @FXML TableView<Vis> individueleVissen;
     @FXML TableColumn naamVis;
@@ -82,6 +81,83 @@ public class DagboekController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        ButtonMeters.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Meters.fxml"));
+                MetersController controller = new MetersController(aquariumId,gebruiker);
+                loader.setController(controller);
+                Stage stage = (Stage)ButtonMeters.getScene().getWindow();
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Scene scene = new Scene(root, 1280, 720);
+                stage.setScene(scene);
+                stage.show();
+
+            }
+        });
+        ButtonPompen.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Pompen.fxml"));
+                PompenController controller = new PompenController(aquariumId,gebruiker);
+                loader.setController(controller);
+                Stage stage = (Stage)ButtonMeters.getScene().getWindow();
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Scene scene = new Scene(root, 1280, 720);
+                stage.setScene(scene);
+                stage.show();
+
+            }
+        });
+        ButtonFilters.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Filters.fxml"));
+                FilterController controller = new FilterController(aquariumId,gebruiker);
+                loader.setController(controller);
+                Stage stage = (Stage)ButtonMeters.getScene().getWindow();
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Scene scene = new Scene(root, 1280, 720);
+                stage.setScene(scene);
+                stage.show();
+
+            }
+        });
+        ButtonLichten.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Verlichting.fxml"));
+                VerlichtingController controller = new VerlichtingController(aquariumId,gebruiker);
+                loader.setController(controller);
+                Stage stage = (Stage)ButtonMeters.getScene().getWindow();
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Scene scene = new Scene(root, 1280, 720);
+                stage.setScene(scene);
+                stage.show();
+
+            }
+        });
 
 
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy");

@@ -15,6 +15,6 @@
       <LocalDateTimeTextField fx:id="installatieDatum" layoutX="52.0" layoutY="187.0" />
       <Text layoutX="300.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Variables " />
       <ChoiceBox fx:id="variabelen" layoutX="300.0" layoutY="100.0" prefWidth="150.0" />
-      <Button layoutX="391.0" layoutY="187.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="ButtonSave" layoutX="391.0" layoutY="187.0" mnemonicParsing="false" text="Save" />
    </children>
 </Pane>

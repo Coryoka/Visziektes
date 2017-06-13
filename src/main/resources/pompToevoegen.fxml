@@ -13,7 +13,7 @@
         <Text layoutX="52.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date mounted" />
         <LocalDateTimeTextField fx:id="installatieDatum" layoutX="52.0" layoutY="187.0" />
         <Text layoutX="300.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date last cleaned" />
-        <Button layoutX="391.0" layoutY="187.0" mnemonicParsing="false" text="Save" />
+        <Button fx:id="ButtonSave" layoutX="391.0" layoutY="187.0" mnemonicParsing="false" text="Save" />
       <LocalDateTimeTextField fx:id="laatstSchoongemaakt" layoutX="300.0" layoutY="100.0" />
     </children>
 </Pane>
