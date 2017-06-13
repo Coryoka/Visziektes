@@ -131,7 +131,7 @@ public class AquariumDAO extends DAO {
     public void InsertMeter(int aquariumId, String naamApparaat, Timestamp datumToevoeging, String variabeleId) throws SQLException {
         checkDbConnection();
         con.prepareStatement("INSERT INTO Meters VALUES("+aquariumId+",'"+naamApparaat+"','"+datumToevoeging+"')").executeUpdate();
-        con.prepareStatement("INSERT INTO MeetbareVariabele_van_Meter VALUES("+aquariumId+",'"+naamApparaat+"','"+datumToevoeging+"',"+ variabeleId+")").executeUpdate();
+        con.prepareStatement("INSERT INTO MeetbareVariabele_van_Meter VALUES("+aquariumId+",'"+naamApparaat+"','"+datumToevoeging+"','"+ variabeleId+"')").executeUpdate();
     }
 
     public void InsertVerlichting(int aquariumId, String naamApparaat, Timestamp datumToevoeging, String lichtsterkte) throws SQLException {
