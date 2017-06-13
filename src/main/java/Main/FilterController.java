@@ -37,6 +37,7 @@ public class FilterController implements Initializable {
     @FXML TableColumn FilterLaatstSchoongemaakt;
     @FXML
     Button nieuweInvoer;
+    @FXML Button NieuwMedium;
     @FXML Button terug;
 
     public FilterController(int aquariumId,Gebruiker gebruiker){
@@ -93,6 +94,24 @@ public class FilterController implements Initializable {
             Scene scene = new Scene(root, 800, 480);
             stage.setScene(scene);
             stage.initOwner(nieuweInvoer.getScene().getWindow());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+        });
+
+        NieuwMedium.setOnAction(event -> {
+            FilterMediumToevoegen controller = new FilterMediumToevoegen(aquariumId,FiltersTableView.getSelectionModel().getSelectedItem());
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("filtermediumToevoegen.fxml"));
+            loader.setController(controller);
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Stage stage = new Stage();
+            Scene scene = new Scene(root, 800, 480);
+            stage.setScene(scene);
+            stage.initOwner(NieuwMedium.getScene().getWindow());
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
         });

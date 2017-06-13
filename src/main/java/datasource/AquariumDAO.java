@@ -113,6 +113,8 @@ public class AquariumDAO extends DAO {
         return verlichtings;
     }
 
+
+
     public void InsertAquarium(String Gebruikersnaam,int VolumeInLiters, int Tempratuur, String AqWaterType, int AantalverversingenPerWeek, int ProcentwaterPerVerversing, int AqLengteInCm, int AqBreedteinCm, int AqHoogteInCm) throws SQLException {
         checkDbConnection();
         con.prepareStatement("INSERT INTO Aquarium VALUES('"+Gebruikersnaam+ "',"+VolumeInLiters+","+Tempratuur+",'"+AqWaterType+"',"+AantalverversingenPerWeek+","+ProcentwaterPerVerversing+","+AqLengteInCm+","+AqBreedteinCm+","+AqHoogteInCm+")").executeUpdate();
@@ -133,6 +135,12 @@ public class AquariumDAO extends DAO {
         con.prepareStatement("INSERT INTO Meters VALUES("+aquariumId+",'"+naamApparaat+"','"+datumToevoeging+"')").executeUpdate();
         con.prepareStatement("INSERT INTO MeetbareVariabele_van_Meter VALUES("+aquariumId+",'"+naamApparaat+"','"+datumToevoeging+"','"+ variabeleId+"')").executeUpdate();
     }
+
+    public void InsertMedium(int aquariumId, String naamApparaat, Timestamp datumToevoeging, Timestamp mediumDatumToevoeging, String MediumNaam) throws SQLException {
+        checkDbConnection();
+        con.prepareStatement("INSERT INTO Filtermediums VALUES ("+aquariumId+",'"+naamApparaat+"','"+datumToevoeging+"','"+mediumDatumToevoeging+",'"+MediumNaam+")");
+    }
+
 
     public void InsertVerlichting(int aquariumId, String naamApparaat, Timestamp datumToevoeging, String lichtsterkte) throws SQLException {
         checkDbConnection();
