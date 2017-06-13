@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import jfxtras.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView fx:id="symptomen" layoutX="93.0" layoutY="93.0" prefHeight="560.0" prefWidth="436.0" />
+      <ListView fx:id="symptomenInVis" layoutX="802.0" layoutY="93.0" prefHeight="560.0" prefWidth="458.0" />
+      <Button fx:id="symptoomToevoegen" layoutX="648.0" layoutY="272.0" mnemonicParsing="false" text="&gt;" />
+      <Button fx:id="symptoomVerwijderen" layoutX="648.0" layoutY="426.0" mnemonicParsing="false" text="&lt;" />
+      <ImageView fx:id="view" fitHeight="150.0" fitWidth="200.0" layoutX="540.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
+      <LocalDateTimeTextField fx:id="eersteWaarneming" layoutX="602.0" layoutY="126.0" />
+      <TextField fx:id="intensiteit" layoutX="631.0" layoutY="195.0" prefHeight="27.0" prefWidth="61.0" />
+      <Text layoutX="581.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date first Appearance" />
+      <Text layoutX="631.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intensity" />
+      <Button fx:id="opslaan" layoutX="563.0" layoutY="626.0" mnemonicParsing="false" text="Save" />
+   </children>
+</Pane>

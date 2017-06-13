@@ -20,8 +20,8 @@
       <Pane prefHeight="720.0" prefWidth="1280.0">
          <children>
             <Text layoutX="97.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" />
-            <Button fx:id="showAquariums" layoutX="97.0" layoutY="171.0" mnemonicParsing="false" text="Mijn aquariums" />
-            <Button fx:id="terug" layoutX="97.0" layoutY="49.0" mnemonicParsing="false" text="Terug" />
+            <Button fx:id="showAquariums" layoutX="97.0" layoutY="171.0" mnemonicParsing="false" text="My aquariums" />
+            <Button fx:id="terug" layoutX="97.0" layoutY="49.0" mnemonicParsing="false" text="Back" />
          </children>
       </Pane>
    </children>

@@ -6,6 +6,7 @@ public class Vis {
     private String naam;
     private String opmerking;
     private int geboortejaar;
+    private Vissoort soort;
 
     public Vis(int visId, int groupId, String naam, String opmerking, int geboortejaar) {
         this.visId = visId;
@@ -20,6 +21,14 @@ public class Vis {
         this.opmerking = opmerking;
         this.geboortejaar = geboortejaar;
         this.groupId = groupId;
+    }
+
+    public Vissoort getSoort() {
+        return soort;
+    }
+
+    public void setSoort(Vissoort soort) {
+        this.soort = soort;
     }
 
     public int getVisId() {

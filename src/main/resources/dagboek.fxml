@@ -7,37 +7,37 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="63.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dagboek" />
+      <Text layoutX="63.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diary" />
       <TableView fx:id="dagboekTableView" layoutX="63.0" layoutY="148.0" prefHeight="285.0" prefWidth="938.0">
         <columns>
-          <TableColumn fx:id="dagKolom" prefWidth="75.0" text="Dag" />
-          <TableColumn fx:id="tijdKolom" prefWidth="75.0" text="Tijd" />
-            <TableColumn fx:id="opmerkingKolom" minWidth="350.0" prefWidth="75.0" text="Opmerking" />
-            <TableColumn fx:id="voeding" minWidth="200.0" prefWidth="75.0" text="Voeding" />
+          <TableColumn fx:id="dagKolom" prefWidth="75.0" text="Day" />
+          <TableColumn fx:id="tijdKolom" prefWidth="75.0" text="Time" />
+            <TableColumn fx:id="opmerkingKolom" minWidth="350.0" prefWidth="75.0" text="Remark" />
+            <TableColumn fx:id="voeding" minWidth="200.0" prefWidth="75.0" text="Nutrition" />
         </columns>
       </TableView>
-      <Button fx:id="nieuweInvoer" layoutX="899.0" layoutY="73.0" mnemonicParsing="false" text="Nieuwe invoer" />
+      <Button fx:id="nieuweInvoer" layoutX="899.0" layoutY="73.0" mnemonicParsing="false" text="New input" />
       <TableView fx:id="vissenInAquarium" layoutX="59.0" layoutY="483.0" prefHeight="208.0" prefWidth="747.0">
         <columns>
-          <TableColumn fx:id="visGenus" prefWidth="75.0" text="Vis genus" />
-          <TableColumn fx:id="vissoort" prefWidth="75.0" text="Vissoort" />
-            <TableColumn fx:id="datumToegevoegd" prefWidth="140.6258544921875" text="Datum toegevoegd" />
-            <TableColumn fx:id="aantalHuidigeVissen" prefWidth="142.64517211914062" text="Aantal huidige vissen" />
-            <TableColumn fx:id="aantalOorspronkelijkeVissen" prefWidth="203.22286987304688" text="Aantal oorspronkelijke vissen" />
-            <TableColumn fx:id="leverancier" prefWidth="101.2503662109375" text="Leverancier" />
+          <TableColumn fx:id="visGenus" prefWidth="75.0" text="Fish genus" />
+          <TableColumn fx:id="vissoort" prefWidth="75.0" text="Fish kind" />
+            <TableColumn fx:id="datumToegevoegd" prefWidth="140.6258544921875" text="Date Added" />
+            <TableColumn fx:id="aantalHuidigeVissen" prefWidth="142.64517211914062" text="Current fish" />
+            <TableColumn fx:id="aantalOorspronkelijkeVissen" prefWidth="203.22286987304688" text="Original fish" />
+            <TableColumn fx:id="leverancier" prefWidth="101.2503662109375" text="Supplier" />
         </columns>
       </TableView>
-      <Button fx:id="vissenToevoegen" layoutX="678.0" layoutY="442.0" mnemonicParsing="false" text="Vissen toevoegen" />
-      <Button fx:id="terug" layoutX="61.0" layoutY="46.0" mnemonicParsing="false" text="terug" />
+      <Button fx:id="vissenToevoegen" layoutX="678.0" layoutY="442.0" mnemonicParsing="false" text="Add fish" />
+      <Button fx:id="terug" layoutX="61.0" layoutY="46.0" mnemonicParsing="false" text="Back" />
       <TableView fx:id="individueleVissen" layoutX="823.0" layoutY="483.0" prefHeight="208.0" prefWidth="433.0">
         <columns>
-          <TableColumn fx:id="naamVis" prefWidth="75.0" text="Vis naam" />
-          <TableColumn fx:id="geboorteJaar" prefWidth="94.0" text="Geboorte jaar" />
-            <TableColumn fx:id="opmerkingVis" prefWidth="79.0" text="Opmerking" />
+          <TableColumn fx:id="naamVis" prefWidth="75.0" text="Fish name" />
+          <TableColumn fx:id="geboorteJaar" prefWidth="94.0" text="Birth year" />
+            <TableColumn fx:id="opmerkingVis" prefWidth="79.0" text="Remark" />
         </columns>
       </TableView>
-      <Text layoutX="59.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vissen in dit aquarium" />
-      <Text layoutX="823.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Individuele vissen" />
-      <Button fx:id="nieuweVis" layoutX="1173.0" layoutY="442.0" mnemonicParsing="false" text="nieuwe vis" />
+      <Text layoutX="59.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fish in this aquarium" />
+      <Text layoutX="823.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Individual fish" />
+      <Button fx:id="nieuweVis" layoutX="1173.0" layoutY="442.0" mnemonicParsing="false" text="New fish" />
    </children>
 </Pane>

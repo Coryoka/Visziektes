@@ -10,14 +10,14 @@
    <children>
       <Text layoutX="55.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <ChoiceBox fx:id="vissen" layoutX="92.0" layoutY="77.0" prefWidth="150.0" />
-      <Text layoutX="92.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vissoort" />
-      <Text layoutX="289.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datum toevoeging" />
+      <Text layoutX="92.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fish kind" />
+      <Text layoutX="289.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date added" />
       <LocalDateTimeTextField fx:id="datumToevoeging" layoutX="289.0" layoutY="77.0" prefHeight="27.0" prefWidth="180.0" />
-      <Text layoutX="92.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aantal vissen" />
+      <Text layoutX="92.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of fish" />
       <TextField fx:id="aantalVissen" layoutX="92.0" layoutY="159.0" />
-      <Text layoutX="289.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leverancier" />
+      <Text layoutX="289.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier" />
       <TextArea fx:id="leverancier" layoutX="289.0" layoutY="159.0" prefHeight="82.0" prefWidth="233.0" />
-      <Button fx:id="opslaan" layoutX="439.0" layoutY="264.0" mnemonicParsing="false" text="toevoegen" />
-      <Button fx:id="verwijderen" layoutX="325.0" layoutY="264.0" mnemonicParsing="false" text="Verwijderen" />
+      <Button fx:id="opslaan" layoutX="439.0" layoutY="264.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="verwijderen" layoutX="325.0" layoutY="264.0" mnemonicParsing="false" text="Delete" />
    </children>
 </Pane>

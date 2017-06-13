@@ -32,9 +32,9 @@ public class ChartController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        categoryAxis.setLabel("Tijd");
-        numberAxis.setLabel("Waarde");
-        waardeGeschiedenis.setTitle("Geschiedenis van: " + variabel);
+        categoryAxis.setLabel("Time");
+        numberAxis.setLabel("Value");
+        waardeGeschiedenis.setTitle("History of: " + variabel);
         Collections.sort(opnames, new Comparator<AquariumDagOpname>() {
             public int compare(AquariumDagOpname o1, AquariumDagOpname o2) {
                 return o1.getDag().compareTo(o2.getDag());

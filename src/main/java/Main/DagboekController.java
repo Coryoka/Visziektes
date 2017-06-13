@@ -282,7 +282,8 @@ public class DagboekController implements Initializable {
 
                         cell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
                             if (event.getClickCount() > 1) {
-
+                                VisDagboekController controller = new VisDagboekController(individueleVissen.getSelectionModel().getSelectedItem());
+                                openPane(nieuweInvoer,"visDagboek.fxml", controller);
                             }
                         });
                         return cell;

@@ -32,8 +32,8 @@ public class VissenDAO extends DAO {
     public String saveVisInAquarium(int aquariumId, VissenInAquarium vissenInAquarium) throws SQLException {
         checkDbConnection();
         PreparedStatement statement = con.prepareStatement("INSERT INTO VissenInAquarium VALUES('" + vissenInAquarium.getVis().getGenus() + "', '"+ vissenInAquarium.getVis().getSoort() + "', "
-                + aquariumId + ", '" + vissenInAquarium.getDatumToevoeging() + "', " + vissenInAquarium.getHuidigeVissen() + ", " + vissenInAquarium.getHuidigeVissen() +
-                ", '" + vissenInAquarium.getLeverancier() + "')");
+                + aquariumId + ", '" +vissenInAquarium.getLeverancier() +"', '" + vissenInAquarium.getDatumToevoeging() + "', " + vissenInAquarium.getHuidigeVissen() + ", " + vissenInAquarium.getHuidigeVissen() +
+                ")");
         statement.executeUpdate();
         SQLWarning warning = statement.getWarnings();
 
@@ -78,10 +78,12 @@ public class VissenDAO extends DAO {
     public ArrayList<Vis> individueleVissenBijAquarium(int aquariumId) throws SQLException {
         checkDbConnection();
         ArrayList<Vis> individueleVissen = new ArrayList<>();
-        ResultSet resultSet = con.prepareStatement("SELECT * FROM Vis V INNER JOIN VisGeschiedenis VG ON V.VisId = VG.VisId WHERE AquariumID = " + aquariumId).executeQuery();
+        ResultSet resultSet = con.prepareStatement("SELECT * FROM Vis V INNER JOIN VisGeschiedenis VG ON V.VisId = VG.VisId INNER JOIN VissenInAquarium VIA ON V.GroupID = VIA.GroepID WHERE VIA.AquariumID = " + aquariumId).executeQuery();
         while(resultSet.next()) {
-            individueleVissen.add(new Vis(resultSet.getInt("VisId"),resultSet.getInt("GroupId"),
-                    resultSet.getString("NaamVis"), resultSet.getString("Opmerking_Vis"), resultSet.getInt("GeboortejaarVis")));
+            Vis vis = new Vis(resultSet.getInt("VisId"),resultSet.getInt("GroupId"),
+                    resultSet.getString("NaamVis"), resultSet.getString("Opmerking_Vis"), resultSet.getInt("GeboortejaarVis"));
+            vis.setSoort(new Vissoort(resultSet.getString("NaamVisGenus"), resultSet.getString("NaamVissoort")));
+            individueleVissen.add(vis);
         }
 
         return individueleVissen;

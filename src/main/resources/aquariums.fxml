@@ -8,15 +8,15 @@
    <children>
       <TableView fx:id="aquariums" layoutX="42.0" layoutY="100.0" prefHeight="514.0" prefWidth="1075.0">
         <columns>
-          <TableColumn fx:id="aquariumID" prefWidth="146.4357032775879" text="Aquarium numer" />
+          <TableColumn fx:id="aquariumID" prefWidth="146.4357032775879" text="Aquarium number" />
           <TableColumn fx:id="volume" minWidth="3.5642929077148438" prefWidth="131.7183380126953" text="Volume" />
-            <TableColumn fx:id="temperatuur" prefWidth="142.10626220703125" text="Streef temperatuur" />
+            <TableColumn fx:id="temperatuur" prefWidth="142.10626220703125" text="Wanted temperature" />
             <TableColumn fx:id="watertype" prefWidth="75.0" text="Watertype" />
-            <TableColumn fx:id="verversing" prefWidth="146.4356689453125" text="Aantalverversingen" />
-            <TableColumn fx:id="procentPerVerversing" prefWidth="159.42401123046875" text="procent per verversing" />
+            <TableColumn fx:id="verversing" prefWidth="146.4356689453125" text="Number of cleanings" />
+            <TableColumn fx:id="procentPerVerversing" prefWidth="159.42401123046875" text="Percentage per cleaning" />
         </columns>
       </TableView>
-      <Button fx:id="AqNieuw" layoutX="1002.0" layoutY="61.0" mnemonicParsing="false" text="Nieuw aquarium" />
-      <Button fx:id="terug" layoutX="42.0" layoutY="36.0" mnemonicParsing="false" text="Terug" />
+      <Button fx:id="AqNieuw" layoutX="1002.0" layoutY="61.0" mnemonicParsing="false" text="New aquarium" />
+      <Button fx:id="terug" layoutX="42.0" layoutY="36.0" mnemonicParsing="false" text="Back" />
    </children>
 </Pane>
